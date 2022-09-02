@@ -3,17 +3,20 @@ import { formatEther } from '@ethersproject/units'
 import React from 'react'
 
 import './App.css'
+import ListNFTs from './components/ListNFTs'
 
 function App() {
-  const { activateBrowserWallet, account, deactivate, chainId } = useEthers()
-  const etherBalance = useEtherBalance(account)
+  const { activateBrowserWallet, account } = useEthers()
+  const etherBalance = useEtherBalance(account) // TODO: should use xDAI
 
   return (
     <div>
       <div>
         <button onClick={() => activateBrowserWallet()}>Connect</button>
       </div>
-      {account && <p>Account: {account}</p>}
+      {account && (<p>Account: {account}</p>)}
+      {etherBalance && (<p>Balance: {etherBalance.toString()}</p>)}
+      {account && (<ListNFTs />)}
     </div>
   )
 }
