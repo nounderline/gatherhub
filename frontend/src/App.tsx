@@ -1,4 +1,4 @@
-import { useEtherBalance, useEthers, Config, Gnosis } from '@usedapp/core'
+import { useEtherBalance, useEthers } from '@usedapp/core'
 import { formatEther } from '@ethersproject/units'
 import React from 'react'
 

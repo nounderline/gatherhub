@@ -1,4 +1,4 @@
-import { Config, DAppProvider, Gnosis } from '@usedapp/core'
+import { Config, DAppProvider, Gnosis, useEthers } from '@usedapp/core'
 import { getDefaultProvider } from 'ethers'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -15,7 +15,12 @@ const config: Config = {
 
 // @ts-ignore
 function NetworkCheck({ children }) {
-  return children
+  const { chainId } = useEthers()
+  if (chainId !== Gnosis.chainId) {
+    return <p>Please use Gnosis chain.</p>
+  } else {
+    return children
+  }
 }
 
 const root = ReactDOM.createRoot(
