@@ -17,7 +17,7 @@ const config: Config = {
 function NetworkCheck({ children }) {
   const { chainId } = useEthers()
   if (chainId !== Gnosis.chainId) {
-    return <p>Please use Gnosis chain.</p>
+    return <p style={{ textAlign: 'center', fontSize: 24, marginTop: 100 }}>Please use Gnosis chain.</p>
   } else {
     return children
   }
