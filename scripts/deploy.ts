@@ -1,23 +1,35 @@
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat'
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const [deployer] = await ethers.getSigners()
+  console.info('Deployer address is:', deployer.address)
 
-  const lockedAmount = ethers.utils.parseEther("1");
+  const Memberships = await ethers.getContractFactory('Memberships')
+  const memberships = await Memberships.deploy(deployer.address, 'Warsaw, Politechnika')
+  await memberships.deployed()
+  console.info('Memberships deployed to:', memberships.address)
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const tierPrices = {
+    1: await memberships.tier1Price(),
+    2: await memberships.tier2Price(),
+    3: await memberships.tier3Price(),
+  }
 
-  await lock.deployed();
-
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  // mint to configured addresses
+  const mintArray = process.env.MINT_ARRAY?.split(',')
+  for (const index in mintArray) {
+    // @ts-ignore
+    const mint = mintArray[index]
+    const [address, tier] = mint.split('.')
+    // @ts-ignore
+    await memberships.purchaseNFT(+tier, address, { value: tierPrices[tier] })
+    console.info(`Membership for address ${address} and tier ${tier} purchased`)
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+  console.error(error)
+  process.exitCode = 1
+})

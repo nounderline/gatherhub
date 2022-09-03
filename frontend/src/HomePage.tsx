@@ -1,7 +1,29 @@
 import { useEthers, useEtherBalance } from '@usedapp/core'
 import AccountChip from './AccountChip'
-import ListNFTs from './components/ListNFTs'
 import ModuleBox from './ModuleBox'
+
+import Connect from './components/Connect'
+import Location from './components/Location'
+import Partnerships from './components/Partnerships'
+import Purchase from './components/Purchase'
+
+import { contract } from './utils/contract'
+
+interface TierWallet {
+  tier: number
+  to: string
+  tokenId: number
+}
+
+const filterMemberByTier = (value: any, tier: number) =>
+  value.filter((log) => log.data.tier === tier)
+
+const parseMembers = (value: any): TierWallet[] =>
+  value.map((item: any) => ({
+    tier: item.data.tier,
+    to: item.data.to,
+    tokenId: item.data.tokenId.toNumber(),
+  }))
 
 export default ({}) => {
   return (
@@ -36,7 +58,7 @@ export default ({}) => {
           <div>lolo</div>
         </ModuleBox>
 
-        <ModuleBox title="Schedule" to="/schedule">
+        <ModuleBox title="Schedule">
           <div>jakieboy</div>
           <div>diigo</div>
           <div>sojitko</div>
@@ -44,7 +66,7 @@ export default ({}) => {
         </ModuleBox>
 
         <ModuleBox title="Location">
-          <div>Warsaw, Politecznika</div>
+          <Location />
         </ModuleBox>
 
         <ModuleBox title="Partnership">
