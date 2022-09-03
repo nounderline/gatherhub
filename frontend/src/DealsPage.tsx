@@ -40,7 +40,7 @@ export default () => {
       })))
     }
   }, [logs?.value?.length])
-  console.warn(deals)
+
   return (
     <>
       <PageHeadline
