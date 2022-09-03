@@ -4,7 +4,7 @@ import AccountChip from './AccountChip'
 export default ({}) => {
   return (
     <>
-      <div className="flex m-auto max-w-6xl py-4 pr-4 items-center justify-between  border-b-2 mb-8">
+      <div className="flex m-auto max-w-6xl py-4 pr-4 items-center justify-between mb-16">
         <Link to="/" className="font-bold">
           GatherHub
         </Link>

@@ -59,7 +59,7 @@ export default ({}) => {
         <div className="mt-2">Warsaw, Poland</div>
       </div>
 
-      <div className="grid grid-cols-3 auto-rows-fr gap-8 max-w-8xl m-auto mt-8">
+      <div className="grid grid-cols-3 auto-rows-fr gap-8 max-w-8xl m-auto mt-8 mb-32">
         <ModuleBox to="/news">
           <PageHeadline
             icon="📣"
@@ -96,11 +96,11 @@ export default ({}) => {
           />
         </ModuleBox>
 
-        <ModuleBox to="/partnership">
+        <ModuleBox to="/deals">
           <PageHeadline
-            icon="🤝"
-            title="Partnerships"
-            subtitle="See who you gonna meet on the stage!"
+            icon="💸"
+            title="Deals"
+            subtitle="Special offers for accommodation and food for all participants."
             small={true}
           />
         </ModuleBox>
