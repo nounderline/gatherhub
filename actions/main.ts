@@ -1,4 +1,4 @@
-import { ActionFn, Context, Event, BlockEvent } from '@tenderly/actions'
+import { ActionFn, Context, Event } from '@tenderly/actions'
 import { providers, utils, Contract, Wallet } from 'ethers'
 
 const contract = new Contract('0x41E6Bf6ee23114E7AD790bB2593eC31574696735', new utils.Interface([
@@ -562,13 +562,16 @@ const contract = new Contract('0x41E6Bf6ee23114E7AD790bB2593eC31574696735', new 
 ]))
 
 export const gatherHubFn: ActionFn = async (context: Context, event: Event) => {
-	let blockEvent = event as BlockEvent
-	blockEvent
+  // TODO: applying happy path where Ramp will actually have the correct amount
+  //   a verification should be implemented for the actual solution
+  // @ts-ignore
+  const value = event.payload.purchase.cryptoAmount
+  // TODO: this should also run only on the actual purchase, not just started Ramp transaction.
+  //const type = event.payload.type
 
-	const provider = new providers.JsonRpcProvider('https://rpc.gnosischain.com/')
-	const signer = new Wallet(process.env.PRIVATE_KEY as string, provider)
-	const location = await contract.connect(signer).location()
+  const PRIVATE_KEY = process.env.PRIVATE_KEY as string || (await context.secrets.get('PRIVATE_KEY'))
+  const provider = new providers.JsonRpcProvider('https://rpc.gnosischain.com/')
+  const signer = new Wallet(PRIVATE_KEY, provider)
+  const tx = await contract.connect(signer).purchaseDeal(value)
+  console.info('purchaseDeal transaction:', tx)
 }
-
-// @ts-ignore
-gatherHubFn()

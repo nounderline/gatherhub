@@ -5,10 +5,10 @@ actions:
     sources: actions
     specs:
       main:
-        description: Call GatherHub contract.
+        description: Call GatherHub contract on Ramp purchase.
         function: main:gatherHubFn
         trigger:
           type: webhook
-            webhook:
-              authenticated: false
+          webhook:
+            authenticated: false
 project_slug: ""

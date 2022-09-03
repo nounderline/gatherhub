@@ -11,6 +11,7 @@ export default () => {
   // }
 
   const purchaseDeal = async () => {
+    // https://docs.ramp.network/configuration
     new RampInstantSDK({
       hostAppName: 'GatherHub',
       hostLogoUrl: 'https://rampnetwork.github.io/assets/misc/test-logo.png',
@@ -18,7 +19,7 @@ export default () => {
       url: 'https://ri-widget-staging.firebaseapp.com/',
       swapAmount: '10000000000000000000', // 10 xDai
       userAddress: '0x58fe6A10618d86ae934d46FE843e7AAF4Eab0c72',
-      webhookStatusUrl: 'https://api.tenderly.co/api/v1/actions/0d27a23b-e5e3-4f57-96c2-d57b0b548183/webhook',
+      webhookStatusUrl: 'https://api.tenderly.co/api/v1/actions/93724581-923d-4cde-83c0-b694229633e9/webhook',
     }).show()
   }
 
