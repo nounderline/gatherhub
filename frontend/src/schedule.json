@@ -401,42 +401,6 @@
         "title": "4 September",
         "events": [
             {
-                "time": "09:00",
-                "title": "Breakfast with hackers",
-                "speaker": null,
-                "description": null
-            },
-            {
-                "time": "10:00",
-                "title": "Open Mic session",
-                "speaker": null,
-                "description": null
-            },
-            {
-                "time": "13:00",
-                "title": "🥟Lunch with Stani Kulechov (👻AAVE) !!Hackers Only!!",
-                "speaker": null,
-                "description": null
-            },
-            {
-                "time": "14:00",
-                "title": "Panel: How to make your hackathon project stand out",
-                "speaker": "Marek Kirejczyk (TrueFi CTO)",
-                "description": null
-            },
-            {
-                "time": "15:00",
-                "title": "Open Mic session",
-                "speaker": null,
-                "description": null
-            },
-            {
-                "time": "🌙",
-                "title": "🛠 Overnight hacking session",
-                "speaker": null,
-                "description": null
-            },
-            {
                 "time": "10:00",
                 "title": "Hackathon submissions deadline",
                 "speaker": null,
