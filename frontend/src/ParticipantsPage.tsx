@@ -4,13 +4,18 @@ import { useEffect, useState } from 'react'
 import ReactNiceAvatar from 'react-nice-avatar'
 
 import { AlchemyClient } from './alchemy'
+import PageHeadline from './PageHeadline'
 import { contract } from './utils/contract'
 import { getTierName, parseMembers, TierWallet } from './utils/util'
 
-const checkENS = (addr: string, profiles: any[] | null, tierWallets: TierWallet[]): string => {
+const checkENS = (
+  addr: string,
+  profiles: any[] | null,
+  tierWallets: TierWallet[]
+): string => {
   const display = profiles?.find(({ address }) => address === addr)?.handle
   const tier = tierWallets?.find((item) => item.to === addr)?.tier
-  return `${display || addr} ${tier && `(Tier ${getTierName(tier)})` || ''}`
+  return `${display || addr} ${(tier && `(Tier ${getTierName(tier)})`) || ''}`
 }
 
 export default ({}) => {
@@ -49,7 +54,16 @@ export default ({}) => {
     }
 
     if (participants && participants.length) {
-      getRSS3Profiles(participants)
+      getRSS3Profiles(participants).then(() => {
+        participants.sort((a, b) => {
+          return (
+            Number(checkENS(b, profiles, wallets).includes('.eth')) -
+            Number(checkENS(a, profiles, wallets).includes('.eth'))
+          )
+        })
+
+        participants_set(participants)
+      })
     }
   }, [participants])
 
@@ -57,7 +71,9 @@ export default ({}) => {
     AlchemyClient.nft
       .getOwnersForContract('0x728a15b8636b2b44e8da69e7a58d7b640235b1f5')
       .then((v) => {
-        const addresses = v.owners.filter((address) => address !== '0x0000000000000000000000000000000000000000')
+        const addresses = v.owners.filter(
+          (address) => address !== '0x0000000000000000000000000000000000000000'
+        )
 
         participants_set(addresses)
 
@@ -66,15 +82,26 @@ export default ({}) => {
   }, [])
 
   return (
-    <div className=" ">
-      {participants?.map((addr) => (
-        <div key={addr} className="flex flex-row  items-center mb-6">
-          <ReactNiceAvatar id={addr} style={{ width: '54px', height: '54px' }} />
-          <div className="ml-2">
-            <code>{checkENS(addr, profiles, wallets)}</code>
+    <>
+      <PageHeadline
+        icon="👽"
+        title="Participants"
+        subtitle="See who you gonna meet on the stage!"
+      />
+
+      <div className="max-w-3xl m-auto">
+        {participants?.map((addr) => (
+          <div key={addr} className="flex flex-row  items-center mb-6">
+            <ReactNiceAvatar
+              id={addr}
+              style={{ width: '54px', height: '54px' }}
+            />
+            <div className="ml-2">
+              <code>{checkENS(addr, profiles, wallets)}</code>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   )
 }
