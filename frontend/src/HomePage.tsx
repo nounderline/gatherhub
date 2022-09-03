@@ -1,9 +1,12 @@
 import ModuleBox from './ModuleBox'
 import PageHeadline from './PageHeadline'
+import Purchase from './components/Purchase'
 
 export default ({}) => {
   return (
     <>
+      <Purchase />
+
       <div className="text-center align-center">
         <img
           src="/ethwarsaw-cover.png"
