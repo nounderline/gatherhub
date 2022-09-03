@@ -32,7 +32,7 @@ export default ({}) => {
     <div className=" ">
       {participants?.map((v, i) => (
         <div key={i} className="flex flex-row  items-center mb-6">
-          <ReactNiceAvatar style={{ width: '54px', height: '54px' }} />
+          <ReactNiceAvatar id={v} style={{ width: '54px', height: '54px' }} />
 
           <div className="ml-2">
             <code>{v}</code>
