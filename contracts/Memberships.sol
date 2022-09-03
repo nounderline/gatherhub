@@ -4,6 +4,9 @@ pragma solidity 0.8.9;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
 
+// TODO: the initial intention was to create dynamic NFTs,
+//   but during the hackathon, it turned out it won't be necessary for our project.
+//   Currently it should display a svg file with just 1, 2 or 3 digit depending on the tier.
 contract Memberships is ERC721 {
     // TODO: move svg to the constructor in v2
     // svg data
@@ -30,7 +33,14 @@ contract Memberships is ERC721 {
     // Mapping token id to tier level
     mapping(uint256 => uint8) private tiers;
 
+    event DealCreated(string title, string description, string hint, string redeemUrl);
+    event DealPurchased(string title, address purchaser, uint256 value);
     event PurchasedNFT(uint256 tokenId, uint8 tier, address to);
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "ERR_OWNER");
+        _;
+    }
 
     /// @param owner_ creator of the project
     constructor(address owner_, string memory location_) ERC721("Membership", "MBS") {
@@ -96,5 +106,23 @@ contract Memberships is ERC721 {
         }
         emit PurchasedNFT(tokenId, tier, to);
         return tokenId;
+    }
+
+    // TODO: there should be a struct and a map of the deals in the actual contract
+    // TODO: there should also be deal price
+    function createDeal(
+        string calldata title,
+        string calldata description,
+        string calldata hint,
+        string calldata redeemUrl
+    ) public onlyOwner {
+        emit DealCreated(title, description, hint, redeemUrl);
+    }
+
+    // TODO: just emit an event, DO NOT use on production, because
+    //   a proper security and structural implementation is needed.
+    //   Currently the purchase will accept any payment.
+    function purchaseDeal(string calldata title) public payable {
+        emit DealPurchased(title, msg.sender, msg.value);
     }
 }

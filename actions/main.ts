@@ -1,9 +1,7 @@
-import { utils } from 'ethers'
-import { Contract } from '@ethersproject/contracts'
+import { ActionFn, Context, Event, BlockEvent } from '@tenderly/actions'
+import { providers, utils, Contract, Wallet } from 'ethers'
 
-export const address = '0x41E6Bf6ee23114E7AD790bB2593eC31574696735'
-
-export const wethInterface = new utils.Interface([
+const contract = new Contract('0x41E6Bf6ee23114E7AD790bB2593eC31574696735', new utils.Interface([
   {
     "inputs": [
       {
@@ -561,6 +559,16 @@ export const wethInterface = new utils.Interface([
     "stateMutability": "nonpayable",
     "type": "function"
   }
-])
+]))
 
-export const contract = new Contract(address, wethInterface)
+export const gatherHubFn: ActionFn = async (context: Context, event: Event) => {
+	let blockEvent = event as BlockEvent
+	blockEvent
+
+	const provider = new providers.JsonRpcProvider('https://rpc.gnosischain.com/')
+	const signer = new Wallet(process.env.PRIVATE_KEY as string, provider)
+	const location = await contract.connect(signer).location()
+}
+
+// @ts-ignore
+gatherHubFn()

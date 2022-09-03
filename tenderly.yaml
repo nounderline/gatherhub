@@ -1,0 +1,14 @@
+account_id: ""
+actions:
+  chrisstormx/project:
+    runtime: v1
+    sources: actions
+    specs:
+      main:
+        description: Call GatherHub contract.
+        function: main:gatherHubFn
+        trigger:
+          type: webhook
+            webhook:
+              authenticated: false
+project_slug: ""
