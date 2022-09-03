@@ -1,3 +1,4 @@
+import PageHeadline from './PageHeadline'
 import ScheduleItems from './schedule.json'
 
 const Items = ScheduleItems.reverse()
@@ -5,11 +6,17 @@ const Items = ScheduleItems.reverse()
 export default ({ items = Items }) => {
   return (
     <>
-      <div className="p-8">
+      <PageHeadline
+        icon="🗓"
+        title="Schedule"
+        subtitle="See who you gonna meet on the stage!"
+      />
+
+      <div className="max-w-6xl m-auto mt-24 bg-white pt-12 px-24 border rounded-lg">
         {items.map((item) => {
           return (
             <>
-              <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-500 text-center ">
+              <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-900 text-center ">
                 {item.title}
               </h1>
               {item.events.map((event) => {

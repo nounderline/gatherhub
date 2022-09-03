@@ -5,7 +5,7 @@ export default ({ title = '', children, to = '' }) => {
 
   return (
     <div
-      className="rounded-md bg-gray-50 border-1px p-2 shadow-md flex items-center justify-center py-12 cursor-pointer hover:bg-white hover:shadow-lg transition-all"
+      className="rounded-lg bg-gray-50 border-1px p-2 shadow-md flex items-center justify-center py-12 cursor-pointer hover:bg-white hover:shadow-lg transition-all p-4"
       onClick={() => navigate(to)}
     >
       {title && (
