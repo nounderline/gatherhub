@@ -32,11 +32,6 @@ contract Memberships is ERC721 {
 
     event PurchasedNFT(uint256 tokenId, uint8 tier, address to);
 
-    modifier onlyOwner() {
-        require(owner == msg.sender, "ERR_OWNER");
-        _;
-    }
-
     /// @param owner_ creator of the project
     constructor(address owner_, string memory location_) ERC721("Membership", "MBS") {
         require(owner_ != address(0), "ERR_NON_ZERO");

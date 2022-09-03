@@ -4,14 +4,14 @@ export interface TierWallet {
   tokenId: number
 }
 
-export const filterMemberByTier= (value: any, tier: number) =>
+export const filterMemberByTier = (value: any, tier: number) =>
   value.filter((log) => log.data.tier === tier)
 
 export const getTierName = (tier: number): string => {
   switch (tier) {
     case 1: return 'Participant'
-    case 2: return 'Startup'
-    case 3: return 'Investor'
+    case 2: return 'Speaker'
+    case 3: return 'Host'
     default: return 'Unknown'
   }
 }
