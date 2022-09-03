@@ -1,3 +1,4 @@
+import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 import { useEthers } from '@usedapp/core'
 import { Contract } from 'ethers'
 
@@ -20,6 +21,15 @@ export default ({ logs }) => {
     await ctr.purchaseNFT(tier, address, { value: tierPrice })
   }
 
+  const getCrypto = () => {
+    new RampInstantSDK({
+      hostAppName: 'GatherHub',
+      hostLogoUrl: 'https://rampnetwork.github.io/assets/misc/test-logo.png',
+      swapAsset: 'XDAI_XDAI',
+      url: 'https://ri-widget-staging.firebaseapp.com/',
+    }).show()
+  }
+
   if (ownedMembership) {
     walletTiers[account as string] = ownedMembership
     return (<div>
@@ -30,9 +40,13 @@ export default ({ logs }) => {
   return (
     <div>
       <div>
-        <button onClick={() => buyMembership(1)}>Buy Tier {getTierName(1)}</button>
-        <button onClick={() => buyMembership(2)} style={{ margin: '0 20px' }}>Buy Tier {getTierName(2)}</button>
-        <button onClick={() => buyMembership(3)}>Buy Tier {getTierName(3)}</button>
+        <button onClick={() => buyMembership(1)}>Buy Tier {getTierName(1)} (0.0001 xDai)</button>
+        <button onClick={() => buyMembership(2)} style={{ marginLeft: 20 }}>Buy Tier {getTierName(2)} (0.0002 xDai)</button>
+        <button onClick={() => buyMembership(3)} style={{ marginLeft: 20 }}>Buy Tier {getTierName(3)} (0.0003 xDai)</button>
+      </div>
+      <div>
+        Don't have xDai? We've got you covered, you can buy it via
+        <button onClick={() => getCrypto()} style={{ marginLeft: 20 }}>Buy Crypto with FIAT</button>
       </div>
     </div>
   )
