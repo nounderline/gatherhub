@@ -15,8 +15,13 @@ export default ({}) => {
   return (
     <>
       <div className="text-center align-center">
-        <h1 className="text-5xl font-bold">ETHWarsaw Hackathon</h1>
-        <div className="text-4xl mt-4">1-4 September 2022</div>
+        <img
+          src="/ethwarsaw-cover.png"
+          className="inline h-64"
+          style={{ marginTop: -120 }}
+        />
+        <h1 className="text-4xl font-bold">ETHWarsaw Hackathon</h1>
+        <div className="text-2xl mt-4">1-4 September 2022</div>
         <div className="mt-2">Warsaw, Poland</div>
       </div>
 
@@ -26,6 +31,15 @@ export default ({}) => {
             icon="📣"
             title="Announcements"
             subtitle="Be in the loop about what's happening."
+            small={true}
+          />
+        </ModuleBox>
+
+        <ModuleBox to="/chat">
+          <PageHeadline
+            icon="💬"
+            title="Chat"
+            subtitle="Talk with all participants."
             small={true}
           />
         </ModuleBox>

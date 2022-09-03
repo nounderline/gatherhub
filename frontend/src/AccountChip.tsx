@@ -9,7 +9,10 @@ export default ({}) => {
   }
 
   return (
-    <div className="flex flex-row items-center ">
+    <div
+      className="flex flex-row items-center p-2 pl-4 rounded-full "
+      style={{ fontFamily: 'monospace' }}
+    >
       {!account && (
         <div className="rounded-md bg-black">
           <button onClick={() => activateBrowserWallet()}>Connect</button>
@@ -22,7 +25,7 @@ export default ({}) => {
         </span>
       )}
 
-      <ReactNiceAvatar id={account} style={{ width: '54px', height: '54px' }} />
+      <ReactNiceAvatar id={account} style={{ width: '48px', height: '48px' }} />
     </div>
   )
 }

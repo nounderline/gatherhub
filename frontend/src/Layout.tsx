@@ -5,7 +5,7 @@ export default ({}) => {
   return (
     <>
       <div className="flex m-auto max-w-6xl py-4 pr-4 items-center justify-between mb-16">
-        <Link to="/" className="font-bold">
+        <Link to="/" className="font-bold text-xl">
           GatherHub
         </Link>
         <AccountChip />

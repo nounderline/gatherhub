@@ -12,11 +12,11 @@ export default ({ items = Items }) => {
         subtitle="See who you gonna meet on the stage!"
       />
 
-      <div className="max-w-3xl m-auto mt-12">
+      <div className="max-w-6xl m-auto mt-24 bg-white pt-12 px-24 border rounded-lg">
         {items.map((item) => {
           return (
             <>
-              <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-500 text-center ">
+              <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-900 text-center ">
                 {item.title}
               </h1>
               {item.events.map((event) => {

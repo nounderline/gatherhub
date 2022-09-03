@@ -34,7 +34,7 @@ export default ({ items = Items }) => {
         subtitle="Special offers for accommodation and food for all participants."
       />
 
-      <div className="max-w-3xl m-auto">
+      <div className="max-w-3xl m-auto mt-12">
         {items.map((item, i) => {
           return <Deal key={i} {...item} />
         })}
@@ -49,7 +49,7 @@ export default ({ items = Items }) => {
           to="/business"
           className="mt-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          Provide a deal
+          Become a partner
         </Link>
       </div>
     </>
@@ -65,7 +65,7 @@ const Deal = ({ title, description, hint, redeem_url }) => {
     }[hint[0]] || 'bg-red-400'
 
   return (
-    <div className="flex items-center p-4 overflow-hidden rounded-md  border-gray-200 border-2 mb-8">
+    <div className="flex items-center p-4 overflow-hidden rounded-md  border-gray-200 border-2 mb-8 bg-white">
       <div
         className={`mr-4 ${color} w-16 h-16 text-white flex items-center justify-center font-bold rounded-md`}
       >
