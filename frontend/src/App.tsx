@@ -9,15 +9,18 @@ import HomePage from './HomePage'
 import ParticipantsPage from './ParticipantsPage'
 import NewsPage from './NewsPage'
 import SchedulePage from './SchedulePage'
+import Layout from './Layout'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/schedule" element={<SchedulePage />} />
-        <Route path="/participants" element={<ParticipantsPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="" element={<HomePage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="schedule" element={<SchedulePage />} />
+          <Route path="participants" element={<ParticipantsPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
