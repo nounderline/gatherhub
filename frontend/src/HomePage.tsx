@@ -12,47 +12,8 @@ import { filterMemberByTier, parseMembers, TierWallet } from './utils/util'
 import PageHeadline from './PageHeadline'
 
 export default ({}) => {
-  const [t1Wallets, setT1Wallet] = useState<TierWallet[]>([])
-  const [t2Wallets, setT2Wallet] = useState<TierWallet[]>([])
-  const [t3Wallets, setT3Wallet] = useState<TierWallet[]>([])
-
-  const logs = useLogs(
-    {
-      contract,
-      event: 'PurchasedNFT',
-      args: [],
-    },
-    {
-      fromBlock: 24010000,
-      toBlock: 'latest',
-    }
-  )
-
-  useEffect(() => {
-    // TODO: refactor to use without useEffect
-    // currently this is a workaround for prototyping RPC limits
-    const tier1Wallets =
-      logs?.value && parseMembers(filterMemberByTier(logs.value, 1))
-    const tier2Wallets =
-      logs?.value && parseMembers(filterMemberByTier(logs.value, 2))
-    const tier3Wallets =
-      logs?.value && parseMembers(filterMemberByTier(logs.value, 3))
-
-    if (!t1Wallets.length && tier1Wallets) {
-      setT1Wallet(tier1Wallets)
-    }
-    if (!t2Wallets.length && tier2Wallets) {
-      setT2Wallet(tier2Wallets)
-    }
-    if (!t3Wallets.length && tier3Wallets) {
-      setT3Wallet(tier3Wallets)
-    }
-  }, [logs?.value?.length])
-
   return (
     <>
-      <Purchase logs={logs?.value} />
-
       <div className="text-center align-center">
         <h1 className="text-5xl font-bold">ETHWarsaw Hackathon</h1>
         <div className="text-4xl mt-4">1-4 September 2022</div>
