@@ -52,15 +52,6 @@ export default ({}) => {
           />
         </ModuleBox>
 
-        <ModuleBox to="/location">
-          <PageHeadline
-            icon="📍"
-            title="Location"
-            subtitle="See who you gonna meet on the stage!"
-            small={true}
-          />
-        </ModuleBox>
-
         <ModuleBox to="/deals">
           <PageHeadline
             icon="💸"
