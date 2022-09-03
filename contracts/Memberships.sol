@@ -3,7 +3,6 @@ pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
-import "hardhat/console.sol";
 
 contract Memberships is ERC721 {
     // TODO: move svg to the constructor in v2

@@ -1,7 +1,7 @@
 import { utils } from 'ethers'
 import { Contract } from '@ethersproject/contracts'
 
-export const address = '0x5df12C8ba8F27C847c73a1E9aee159d870AB99EF'
+export const address = '0xC76BDd75eF71D19A3072920dBDC91a0Dd6B53124'
 
 export const wethInterface = new utils.Interface([
   {
