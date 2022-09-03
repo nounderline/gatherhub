@@ -1,31 +1,46 @@
-import { parse } from 'path'
-import PageHeadline from './PageHeadline'
 import { ArrowUpRightIcon } from '@heroicons/react/20/solid'
+import { useLogs } from '@usedapp/core'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Items = [
-  {
-    title: 'Rooms for Hackers at Martiot Hotels',
-    description: 'Marriott invites all crypto hackers for our special deal!',
-    hint: '10%',
-    redeem_url: 'https://www.marriott.com/default.mi',
-  },
-  {
-    title: 'Affordable Uber rides for all Crypto Hackers',
-    description:
-      "Affordable rides for hackers who don't know how to make money.",
-    hint: '30%',
-    redeem_url: 'https://www.marriott.com/default.mi',
-  },
-  {
-    title: 'Healthy food for Degens',
-    description: 'We have a healthy food to help out degenerates come to life',
-    hint: '13%',
-    redeem_url: 'https://www.marriott.com/default.mi',
-  },
-]
+import PageHeadline from './PageHeadline'
+import { contract } from './utils/contract'
 
-export default ({ items = Items }) => {
+interface Deal {
+  description: string
+  hint: string
+  redeemUrl: string
+  title: string
+}
+
+export default () => {
+  const [deals, setDeals] = useState<Deal[]>([])
+
+  const logs = useLogs(
+    {
+      contract,
+      event: 'DealCreated',
+      args: [],
+    },
+    {
+      fromBlock: 24010000,
+      toBlock: 'latest',
+    }
+  )
+
+  useEffect(() => {
+    // TODO: refactor to use without useEffect
+    // currently this is a workaround for prototyping RPC limits
+    if (!deals.length && logs?.value) {
+      setDeals(logs.value.map((v) => ({
+        description: v.data.description,
+        hint: v.data.hint,
+        redeemUrl: v.data.redeemUrl,
+        title: v.data.title,
+      })))
+    }
+  }, [logs?.value?.length])
+  console.warn(deals)
   return (
     <>
       <PageHeadline
@@ -35,7 +50,7 @@ export default ({ items = Items }) => {
       />
 
       <div className="max-w-3xl m-auto mt-12">
-        {items.map((item, i) => {
+        {deals.map((item, i) => {
           return <Deal key={i} {...item} />
         })}
       </div>
@@ -56,7 +71,7 @@ export default ({ items = Items }) => {
   )
 }
 
-const Deal = ({ title, description, hint, redeem_url }) => {
+const Deal = ({ title, description, hint, redeemUrl }: Deal) => {
   const color =
     {
       1: 'bg-orange-400',
@@ -77,7 +92,7 @@ const Deal = ({ title, description, hint, redeem_url }) => {
       </div>
       <a
         target="_blank"
-        href={redeem_url}
+        href={redeemUrl}
         className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         Redeem

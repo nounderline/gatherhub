@@ -1,14 +1,4 @@
-import { useLogs } from '@usedapp/core'
-import { useEffect, useState } from 'react'
 import ModuleBox from './ModuleBox'
-
-import Connect from './components/Connect'
-import Location from './components/Location'
-import Partnerships from './components/Partnerships'
-import Purchase from './components/Purchase'
-
-import { contract } from './utils/contract'
-import { filterMemberByTier, parseMembers, TierWallet } from './utils/util'
 import PageHeadline from './PageHeadline'
 
 export default ({}) => {
