@@ -2,15 +2,7 @@ import { useEthers } from '@usedapp/core'
 import { Contract } from 'ethers'
 
 import { contract, wethInterface } from '../utils/contract'
-
-const getTierName = (tier: number): string => {
-  switch (tier) {
-    case 1: return 'Participant'
-    case 2: return 'Startup'
-    case 3: return 'Investor'
-    default: return 'Unknown'
-  }
-}
+import { getTierName } from '../utils/util'
 
 const walletTiers = {} // TODO: improve this makeshift caching
 

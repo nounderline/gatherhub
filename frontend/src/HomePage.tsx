@@ -8,21 +8,7 @@ import Partnerships from './components/Partnerships'
 import Purchase from './components/Purchase'
 
 import { contract } from './utils/contract'
-
-interface TierWallet {
-  tier: number
-  to: string
-  tokenId: number
-}
-
-const filterMemberByTier= (value: any, tier: number) =>
-  value.filter((log) => log.data.tier === tier)
-
-const parseMembers = (value: any): TierWallet[] => value.map((item: any) => ({
-  tier: item.data.tier,
-  to: item.data.to,
-  tokenId: item.data.tokenId.toNumber(),
-}))
+import { filterMemberByTier, parseMembers, TierWallet } from './utils/util'
 
 export default ({}) => {
   const [t1Wallets, setT1Wallet] = useState<TierWallet[]>([])
@@ -93,7 +79,7 @@ export default ({}) => {
       </ModuleBox>
 
       <ModuleBox title="Partnership">
-        <Partnerships tier2Wallets={t2Wallets} />
+        <Partnerships tier3Wallets={t3Wallets} />
       </ModuleBox>
     </>
   )
