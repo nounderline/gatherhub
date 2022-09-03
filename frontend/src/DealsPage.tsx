@@ -32,12 +32,14 @@ export default () => {
     // TODO: refactor to use without useEffect
     // currently this is a workaround for prototyping RPC limits
     if (!deals.length && logs?.value) {
-      setDeals(logs.value.map((v) => ({
-        description: v.data.description,
-        hint: v.data.hint,
-        redeemUrl: v.data.redeemUrl,
-        title: v.data.title,
-      })))
+      setDeals(
+        logs.value.map((v) => ({
+          description: v.data.description,
+          hint: v.data.hint,
+          redeemUrl: v.data.redeemUrl,
+          title: v.data.title,
+        }))
+      )
     }
   }, [logs?.value?.length])
 
@@ -62,6 +64,7 @@ export default () => {
         </div>
         <Link
           to="/business"
+          target="_blank"
           className="mt-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           Become a partner

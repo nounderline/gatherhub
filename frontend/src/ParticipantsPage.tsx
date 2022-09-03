@@ -5,10 +5,7 @@ import ReactNiceAvatar from 'react-nice-avatar'
 import { AlchemyClient } from './alchemy'
 import PageHeadline from './PageHeadline'
 
-const checkENS = (
-  addr: string,
-  profiles: any[] | null,
-): string => {
+const checkENS = (addr: string, profiles: any[] | null): string => {
   const display = profiles?.find(({ address }) => address === addr)?.handle
   return `${display || addr}`
 }
@@ -55,7 +52,7 @@ export default () => {
         subtitle="See who you gonna meet on the stage!"
       />
 
-      <div className="max-w-3xl m-auto">
+      <div className="max-w-3xl m-auto mt-24 bg-white p-12 border rounded-lg">
         {participants?.map((addr) => (
           <div key={addr} className="flex flex-row  items-center mb-6">
             <ReactNiceAvatar

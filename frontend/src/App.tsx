@@ -8,6 +8,7 @@ import SchedulePage from './SchedulePage'
 import Layout from './Layout'
 import DealsPage from './DealsPage'
 import ChatPage from './ChatPage'
+import BusinessPage from './BusinessPage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="deals" element={<DealsPage />} />
           <Route path="chat" element={<ChatPage />} />
         </Route>
+        <Route path="/business" element={<BusinessPage />} />
       </Routes>
     </BrowserRouter>
   )
