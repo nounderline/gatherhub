@@ -9,6 +9,7 @@ import Purchase from './components/Purchase'
 
 import { contract } from './utils/contract'
 import { filterMemberByTier, parseMembers, TierWallet } from './utils/util'
+import PageHeadline from './PageHeadline'
 
 export default ({}) => {
   const [t1Wallets, setT1Wallet] = useState<TierWallet[]>([])
@@ -30,9 +31,12 @@ export default ({}) => {
   useEffect(() => {
     // TODO: refactor to use without useEffect
     // currently this is a workaround for prototyping RPC limits
-    const tier1Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 1))
-    const tier2Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 2))
-    const tier3Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 3))
+    const tier1Wallets =
+      logs?.value && parseMembers(filterMemberByTier(logs.value, 1))
+    const tier2Wallets =
+      logs?.value && parseMembers(filterMemberByTier(logs.value, 2))
+    const tier3Wallets =
+      logs?.value && parseMembers(filterMemberByTier(logs.value, 3))
 
     if (!t1Wallets.length && tier1Wallets) {
       setT1Wallet(tier1Wallets)
@@ -50,36 +54,55 @@ export default ({}) => {
       <Purchase logs={logs?.value} />
 
       <div className="text-center align-center">
-        <h1 className="text-3xl">ETHWarsaw Hackathon</h1>
-        <div>1-4 September 2022</div>
-        <div>Warsaw, Poland</div>
+        <h1 className="text-5xl font-bold">ETHWarsaw Hackathon</h1>
+        <div className="text-4xl mt-4">1-4 September 2022</div>
+        <div className="mt-2">Warsaw, Poland</div>
       </div>
 
-      <div className="grid grid-rows-2  grid-flow-col  gap-4 p-8 max-w-7xl m-auto">
-        <ModuleBox title="Annoucmements" to="/news">
-          dsads
+      <div className="grid grid-cols-3 auto-rows-fr gap-8 max-w-8xl m-auto mt-8">
+        <ModuleBox to="/news">
+          <PageHeadline
+            icon="📣"
+            title="Announcements"
+            subtitle="Be in the loop about what's happening."
+            small={true}
+          />
         </ModuleBox>
 
-        <ModuleBox title="Participants" to="/participants">
-          <div>jakieboy</div>
-          <div>diigo</div>
-          <div>sojitko</div>
-          <div>lolo</div>
+        <ModuleBox to="/participants">
+          <PageHeadline
+            icon="👽"
+            title="Participants"
+            subtitle="See who you gonna meet on the stage!"
+            small={true}
+          />
         </ModuleBox>
 
-        <ModuleBox title="Schedule" to="/schedule">
-          <div>jakieboy</div>
-          <div>diigo</div>
-          <div>sojitko</div>
-          <div>lolo</div>
+        <ModuleBox to="/schedule">
+          <PageHeadline
+            icon="🗓"
+            title="Schedule"
+            subtitle="See who you gonna meet on the stage!"
+            small={true}
+          />
         </ModuleBox>
 
-        <ModuleBox title="Location">
-          <Location />
+        <ModuleBox to="/location">
+          <PageHeadline
+            icon="📍"
+            title="Location"
+            subtitle="See who you gonna meet on the stage!"
+            small={true}
+          />
         </ModuleBox>
 
-        <ModuleBox title="Partnership">
-          <Partnerships tier3Wallets={t3Wallets} />
+        <ModuleBox to="/partnership">
+          <PageHeadline
+            icon="🤝"
+            title="Partnerships"
+            subtitle="See who you gonna meet on the stage!"
+            small={true}
+          />
         </ModuleBox>
       </div>
     </>

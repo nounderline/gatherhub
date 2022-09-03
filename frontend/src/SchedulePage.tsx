@@ -1,10 +1,12 @@
 import ScheduleItems from './schedule.json'
 
-export default ({ items = ScheduleItems }) => {
+const Items = ScheduleItems.reverse()
+
+export default ({ items = Items }) => {
   return (
     <>
       <div className="p-8">
-        {items.reverse().map((item) => {
+        {items.map((item) => {
           return (
             <>
               <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-500 text-center ">

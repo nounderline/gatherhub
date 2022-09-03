@@ -47,7 +47,7 @@ export default ({}) => {
           <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           New Announcement
         </button>
-        <div className=" text-gray-400">for hosts only</div>
+        <div className=" text-gray-400">for owners only</div>
       </div>
 
       <Slideover
