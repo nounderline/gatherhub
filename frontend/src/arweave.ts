@@ -26,7 +26,11 @@ export const useArweaveGraphhQL = (
 
 export const useArweaveTransactions = (
   tags: { name: string; values: string[] }[],
-  { limit = 100, swrConfig = null as SWRConfiguration } = {}
+  {
+    limit = 100,
+    swrConfig = null as SWRConfiguration,
+    reverseResult = false,
+  } = {}
 ) => {
   const [content, content_set] = useState(null)
   const { data, error } = useArweaveGraphhQL(
@@ -68,6 +72,10 @@ export const useArweaveTransactions = (
           })
         )
       ).then((newContent) => {
+        if (reverseResult) {
+          newContent.reverse()
+        }
+
         content_set(newContent)
       })
     }
