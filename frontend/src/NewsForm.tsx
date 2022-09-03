@@ -9,10 +9,20 @@ export default ({ onSubmit = () => undefined }) => {
   const [value, value_set] = useState('')
 
   const handleConnect = () => {
+    if (value.trim().length < 4) {
+      alert('Content must have at least 4 characters.')
+
+      return
+    }
+
     arweaveWebWallet.connect(['ACCESS_ADDRESS', 'SIGN_TRANSACTION', 'DISPATCH'])
 
     arweaveWebWallet.on('change', (e) => {
       arweaveWallet_set(arweaveWebWallet.address)
+
+      if (arweaveWebWallet.address) {
+        handleSubmit()
+      }
     })
   }
 
@@ -42,7 +52,7 @@ export default ({ onSubmit = () => undefined }) => {
     <div className="p-4">
       <div>
         <textarea
-          className=" w-full relative mt-1 rounded-md shadow-sm h-24 p-2"
+          className="w-full relative mt-1 rounded-md shadow-sm h-24 p-2"
           style={{ fontFamily: 'monospace' }}
           placeholder="Your **Markdown** content goes here."
           value={value}

@@ -25,8 +25,6 @@ export default ({}) => {
     { limit: 10, swrConfig: { refreshInterval: 3 } }
   )
 
-  console.log(data)
-
   const handlePostSubmit = () => {}
 
   return (
@@ -46,18 +44,35 @@ export default ({}) => {
 
       <NewsForm onSubmit={handlePostSubmit} />
 
-      {data && (
-        <div>
-          {data.map((post) => {
-            return (
-              <div key={post.id}>
-                <div>{post.id}</div>
-                <div>{post.data}</div>
-              </div>
-            )
-          })}
-        </div>
-      )}
+      <div className="m-auto max-w-3xl">
+        {data && (
+          <div>
+            {data.map((post) => {
+              return (
+                <Post
+                  key={post.id}
+                  owner={post.owner}
+                  data={post.data}
+                  timestamp={post.timestamp}
+                />
+              )
+            })}
+          </div>
+        )}
+      </div>
     </>
+  )
+}
+
+const Post = ({ data, owner, timestamp }) => {
+  const timeString = timestamp
+    ? new Date(timestamp * 1000).toLocaleString()
+    : 'just now'
+
+  return (
+    <div className="block p-4 mb-4  bg-white rounded-lg border border-gray-200 shadow-md ">
+      <div className=" text-gray-400">{timeString}</div>
+      <div className="text-2xl">{data}</div>
+    </div>
   )
 }
