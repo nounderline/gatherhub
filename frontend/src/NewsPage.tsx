@@ -17,15 +17,16 @@ export default ({}) => {
     [
       {
         name: 'App-Name',
-        values: ['DegenTown'],
+        values: ['GatherHub'],
       },
       {
         name: 'Content-Type',
         values: ['text/markdown'],
       },
     ],
-    { limit: 10, swrConfig: { refreshInterval: 3 } }
+    { limit: 10, swrConfig: { refreshInterval: 2 } }
   )
+  const [isEditing, isEditing_set] = useState(false)
 
   const handlePostSubmit = () => {}
 
@@ -37,30 +38,23 @@ export default ({}) => {
         subtitle="Be in the loop about what's happening."
       />
 
-      <div className="text-center mt-8">
+      <div className="text-center mt-8 mb-8">
         <button
+          onClick={(_) => isEditing_set(true)}
           type="button"
           className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           New Announcement
         </button>
-        <div className=" text-gray-400">for owners only</div>
+        <div className=" text-gray-400">for hosts only</div>
       </div>
 
-      <div
-        onClick={() => {
-          arweaveWebWallet.connect([
-            'ACCESS_ADDRESS',
-            'SIGN_TRANSACTION',
-            'DISPATCH',
-          ])
-        }}
+      <Slideover
+        title="New Announcement"
+        open={isEditing}
+        onClose={() => isEditing_set(false)}
       >
-        News
-      </div>
-
-      <Slideover title="New Announcement">
         <NewsForm onSubmit={handlePostSubmit} />
       </Slideover>
 
@@ -101,12 +95,15 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
-function Slideover({ title = '', children }) {
-  const [open, setOpen] = useState(true)
-
+function Slideover({
+  title = '',
+  open = true,
+  onClose = () => undefined,
+  children,
+}) {
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -143,7 +140,7 @@ function Slideover({ title = '', children }) {
                           <button
                             type="button"
                             className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             <span className="sr-only">Close panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -154,21 +151,6 @@ function Slideover({ title = '', children }) {
 
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       {children}
-                    </div>
-                    <div className="flex flex-shrink-0 justify-end px-4 py-4">
-                      <button
-                        type="button"
-                        className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        onClick={() => setOpen(false)}
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="submit"
-                        className="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      >
-                        Save
-                      </button>
                     </div>
                   </div>
                 </Dialog.Panel>

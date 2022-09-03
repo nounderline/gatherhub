@@ -4,7 +4,7 @@ export default ({ items = ScheduleItems }) => {
   return (
     <>
       <div className="p-8">
-        {items.map((item) => {
+        {items.reverse().map((item) => {
           return (
             <>
               <h1 className="font-bold text-4xl mt-8 mb-4  text-gray-500 text-center ">

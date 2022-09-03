@@ -32,7 +32,7 @@ export default ({ onSubmit = () => undefined }) => {
     const tx = await arweave.createTransaction({
       data: value,
     })
-    tx.addTag('App-Name', 'DegenTown')
+    tx.addTag('App-Name', 'GatherHub')
     tx.addTag('Content-Type', 'text/markdown')
     tx.addTag('Type', 'News')
 
@@ -44,15 +44,16 @@ export default ({ onSubmit = () => undefined }) => {
     }
 
     submitting_set(false)
+    value_set('')
 
     onSubmit()
   }
 
   return (
-    <div className="p-4">
+    <div>
       <div>
         <textarea
-          className="w-full relative mt-1 rounded-md shadow-sm h-24 p-2"
+          className="w-full relative mt-1 rounded-md shadow-sm h-48 p-2"
           style={{ fontFamily: 'monospace' }}
           placeholder="Your **Markdown** content goes here."
           value={value}
