@@ -69,7 +69,7 @@ export default ({}) => {
     <div className=" ">
       {participants?.map((addr) => (
         <div key={addr} className="flex flex-row  items-center mb-6">
-          <ReactNiceAvatar style={{ width: '54px', height: '54px' }} />
+          <ReactNiceAvatar id={addr} style={{ width: '54px', height: '54px' }} />
           <div className="ml-2">
             <code>{checkENS(addr, profiles, wallets)}</code>
           </div>
