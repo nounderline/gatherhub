@@ -25,8 +25,13 @@ contract Memberships is ERC721 {
     // owner of the project
     address public immutable owner;
 
+    // location of the venue
+    string public location;
+
     // Mapping token id to tier level
     mapping(uint256 => uint8) private tiers;
+
+    event PurchasedNFT(uint256 tokenId, uint8 tier, address to);
 
     modifier onlyOwner() {
         require(owner == msg.sender, "ERR_OWNER");
@@ -34,9 +39,10 @@ contract Memberships is ERC721 {
     }
 
     /// @param owner_ creator of the project
-    constructor(address owner_) ERC721("Membership", "MBS") {
+    constructor(address owner_, string memory location_) ERC721("Membership", "MBS") {
         require(owner_ != address(0), "ERR_NON_ZERO");
         owner = owner_;
+        location = location_;
     }
 
     /// @notice function to return first part of the URI
@@ -82,17 +88,19 @@ contract Memberships is ERC721 {
             require(msg.value == tier1Price, "ERR_VALUE");
             tier1TokenId++;
             _safeMint(to, tier1TokenId);
-            return tier1TokenId;
+            tokenId = tier1TokenId;
         } else if (tier == 2) {
             require(msg.value == tier2Price, "ERR_VALUE");
             tier2TokenId++;
             _safeMint(to, tier2TokenId);
-            return tier2TokenId;
+            tokenId = tier2TokenId;
         } else if (tier == 3) {
             require(msg.value == tier3Price, "ERR_VALUE");
             tier3TokenId++;
             _safeMint(to, tier3TokenId);
-            return tier3TokenId;
+            tokenId = tier3TokenId;
         }
+        emit PurchasedNFT(tokenId, tier, to);
+        return tokenId;
     }
 }

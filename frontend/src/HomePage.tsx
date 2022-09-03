@@ -1,10 +1,44 @@
-import { useEthers, useEtherBalance } from '@usedapp/core'
-import ListNFTs from './components/ListNFTs'
+import { useLogs, useEthers, useEtherBalance } from '@usedapp/core'
 import ModuleBox from './ModuleBox'
+
+import Location from './components/Location'
+import Partnerships from './components/Partnerships'
+
+import { contract } from './utils/contract'
+
+interface TierWallet {
+  tier: number
+  to: string
+  tokenId: number
+}
+
+const filterMemberByTier= (value: any, tier: number) =>
+  value.filter((log) => log.data.tier === tier)
+
+const parseMembers = (value: any): TierWallet[] => value.map((item: any) => ({
+  tier: item.data.tier,
+  to: item.data.to,
+  tokenId: item.data.tokenId.toNumber(),
+}))
 
 export default ({}) => {
   const { activateBrowserWallet, account } = useEthers()
   const etherBalance = useEtherBalance(account) // TODO: should use xDAI
+
+  const logs = useLogs(
+    {
+      contract,
+      event: 'PurchasedNFT',
+      args: [],
+    },
+    {
+      fromBlock: 24010000,
+      toBlock: 'latest',
+    }
+  )
+  const tier1Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 1))
+  const tier2Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 2))
+  const tier3Wallets = logs?.value && parseMembers(filterMemberByTier(logs.value, 3))
 
   return (
     <>
@@ -13,7 +47,6 @@ export default ({}) => {
       </div>
       {account && <p>Account: {account}</p>}
       {etherBalance && <p>Balance: {etherBalance.toString()}</p>}
-      {account && <ListNFTs />}
 
       <ModuleBox title="News">dsdsdasdsa</ModuleBox>
 
@@ -39,11 +72,11 @@ export default ({}) => {
       </ModuleBox>
 
       <ModuleBox title="Location">
-        <div>Warsaw, Politecznika</div>
+        <Location />
       </ModuleBox>
 
       <ModuleBox title="Partnership">
-        <div>Become a partner.</div>
+        <Partnerships tier2Wallets={tier2Wallets} />
       </ModuleBox>
     </>
   )

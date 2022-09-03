@@ -5,7 +5,7 @@ async function main() {
   console.info('Deployer address is:', deployer.address)
 
   const Memberships = await ethers.getContractFactory('Memberships')
-  const memberships = await Memberships.deploy(deployer.address)
+  const memberships = await Memberships.deploy(deployer.address, 'Warsaw, Politechnika')
   await memberships.deployed()
   console.info('Memberships deployed to:', memberships.address)
 

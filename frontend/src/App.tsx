@@ -4,7 +4,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './App.css'
-import ListNFTs from './components/ListNFTs'
 import ModuleBox from './ModuleBox'
 import HomePage from './HomePage'
 import ParticipantsPage from './ParticipantsPage'
