@@ -1,12 +1,14 @@
 import ModuleBox from './ModuleBox'
 import PageHeadline from './PageHeadline'
 
+import ETHWarsawCover from './images/ethwarsaw-cover.png'
+
 export default ({}) => {
   return (
     <>
       <div className="text-center align-center">
         <img
-          src="/ethwarsaw-cover.png"
+          src={ETHWarsawCover}
           className="inline h-64"
           style={{ marginTop: -120 }}
         />

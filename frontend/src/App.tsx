@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import './App.css'
 import HomePage from './HomePage'
@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -26,7 +26,7 @@ function App() {
         </Route>
         <Route path="/business" element={<BusinessPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
