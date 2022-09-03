@@ -38,12 +38,11 @@ export const useArweaveTransactions = (
           edges {
             node {
               id
+              block {
+                timestamp
+              }
               owner {
                 address
-              }
-              tags {
-                name,
-                value
               }
             }
           }
@@ -59,21 +58,25 @@ export const useArweaveTransactions = (
 
       Promise.all(
         txs.map((tx) =>
-          axios.get(`https://arweave.net/${id}`).then((res) => {
-            return { id: tx.id, owner: tx.owner.address, data: res.data }
+          axios.get(`https://arweave.net/${tx.id}`).then((res) => {
+            return {
+              id: tx.id,
+              owner: tx.owner.address,
+              data: res.data,
+              timestamp: tx.block?.timestamp,
+            }
           })
         )
-      ).then((txs) => {
-        content_set(txs)
+      ).then((newContent) => {
+        content_set(newContent)
       })
     }
   }, [JSON.stringify(data)])
 
   return {
-    data: data?.error,
+    data: content,
+    error,
   }
-
-  return { data, error }
 }
 
 // TODO we're not going to use it?
