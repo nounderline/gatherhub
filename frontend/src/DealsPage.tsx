@@ -27,17 +27,17 @@ export default () => {
       toBlock: 'latest',
     }
   )
-  const logs2 = useLogs(
-    {
-      contract,
-      event: 'DealPurchased',
-      args: [],
-    },
-    {
-      fromBlock: 24010000,
-      toBlock: 'latest',
-    }
-  )
+  // const logs2 = useLogs(
+  //   {
+  //     contract,
+  //     event: 'DealPurchased',
+  //     args: [],
+  //   },
+  //   {
+  //     fromBlock: 24010000,
+  //     toBlock: 'latest',
+  //   }
+  // )
   // TODO: include logs2 into the views
 
   useEffect(() => {

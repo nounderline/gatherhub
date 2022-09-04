@@ -1,15 +1,6 @@
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
 
 export default () => {
-  // const ownedMembership = logs?.find(({ data: { to } }) => to === account)?.data?.tier || walletTiers[account as string]
-
-  // if (ownedMembership) {
-  //   walletTiers[account as string] = ownedMembership
-  //   return (<div>
-  //     Tier: {getTierName(ownedMembership)}
-  //   </div>)
-  // }
-
   const purchaseDeal = async () => {
     // https://docs.ramp.network/configuration
     new RampInstantSDK({
