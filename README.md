@@ -8,6 +8,8 @@
 - During the hackathon, we hacked a project helping organizations such as ETHWarsaw with features described in detail below.
 - At the same time, we wanted to learn as much as possible about incredible projects and companies we met with during the hackathon by integrating some of their tech solutions into our project.
 
+The dApp should be available under: https://bonnevoyager.github.io/ethwarsaw-hackathon on Gnosis Chain.
+
 What we did technically:
 - 🔗 deployed our multi-tiered NFT smart contract on Gnosis Chain, and the address of the contract is [0x41E6Bf6ee23114E7AD790bB2593eC31574696735](https://gnosisscan.io/address/0x41E6Bf6ee23114E7AD790bB2593eC31574696735). We didn't even have to use the testnet, because fees were so low!
 - 🔐 used https://unlock-protocol.com to fetch ETHWarsaw locks from Optimism chain. Since we deployed our contract on Gnosis Chain, we had a chance to experiment with multiple chains in a single dApp.
